@@ -642,7 +642,7 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   width: 280px;
   height: 280px;
-  margin-bottom: 48px;
+  margin-bottom: 36px;
   -ms-grid-rows: (1fr)[3];
       grid-template-rows: repeat(3, 1fr);
   -ms-grid-columns: (1fr)[3];
