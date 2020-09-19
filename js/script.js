@@ -20,7 +20,8 @@ const recordModal = document.querySelectorAll('.record');
 const gameWinModal = document.getElementById('game-win-modal'),
    gameWinRecord = document.getElementById('game-win-record'),
    gameWinRecordNumber = document.getElementById('game-win-record-number'),
-   gameWinModalCap = document.querySelector('.game-win-modal-cap');
+   gameWinModalCap = document.querySelector('.game-win-modal-cap'),
+   gameWinModalCloseButton = document.getElementById('game-win-modal-close-button');
 
 let fieldSize = 9;
 let movesNumber = 0, recordNumber = Infinity;
@@ -28,17 +29,21 @@ let movesNumber = 0, recordNumber = Infinity;
 
 
 // Functions
+
+// set field size
 const setFieldSize = (fieldSize) => {
    gameField.style.gridTemplateRows = `repeat(${Math.sqrt(fieldSize)}, 1fr)`;
    gameField.style.gridTemplateColumns = `repeat(${Math.sqrt(fieldSize)}, 1fr)`;
 };
 
+// remove all previous field cells
 const removeFieldCells = () => {
    if (gameField.hasChildNodes()) {
       gameField.innerHTML = '';
    }
 };
 
+// create field cells
 const createFieldCells = (fieldSize) => {
    // while need to create a field cell do this
    for (let counter = 0; counter < fieldSize; ++counter) {
@@ -54,51 +59,64 @@ const createFieldCells = (fieldSize) => {
 const getFieldSize = (event) => {
    fieldSize = event.dataset.size;
 
-   const rows = Math.sqrt(fieldSize);
-   if (localStorage.getItem(`FieldRecordNumber${rows}`)) {
-      recordNumber = localStorage.getItem(`FieldRecordNumber${rows}`);
+   // get number of field rows 
+   const fieldRows = Math.sqrt(fieldSize);
+
+   // set previous record on current game
+   if (localStorage.getItem(`FieldRecordNumber${fieldRows}`)) {
+      recordNumber = localStorage.getItem(`FieldRecordNumber${fieldRows}`);
       gameRecordNumber.innerHTML = recordNumber;
    }
 
+   // set field size
    setFieldSize(fieldSize);
-
+   // clear previous game field
    removeFieldCells();
+   // create field cells for his size
    createFieldCells(fieldSize);
 };
 
 
+// Rewrite record number in game
 const rewriteRecordNumber = () => {
    gameRecordNumber.innerHTML = recordNumber;
 };
 
+// Increase number of moves and Rewrite it in game
 const rewriteMovesNumber = () => {
    movesNumber++;
    gameMovesNumber.innerHTML = movesNumber;
 };
 
+// Reset to start position the variable 'movesNumber'
 const cleanMovesNumber = () => {
    movesNumber = 0;
    gameMovesNumber.innerHTML = "-";
 };
 
 
+// Open start modal for change field size
 const openStartModal = () => {
    fieldSizeModal.classList.remove('visually-hidden');
 };
 
-const closeModal = () => {
+// Close start modal for change field size
+const closeStartModal = () => {
    fieldSizeModal.classList.add('visually-hidden');
 };
 
+// Open game modal
 const openGame = () => {
    game.classList.remove('visually-hidden');
 };
 
+// Close game modal
 const closeGame = () => {
    game.classList.add('visually-hidden');
 };
 
 
+// Switching the state of the cell and adjacent to it when clicked
 const switchCellsColor = (adjacentCells) => {
    for (let adjacentCellIndex of adjacentCells) {
       const adjacentCell = document.querySelector(`.game-cell[data-index='${adjacentCellIndex}']`);
@@ -106,6 +124,7 @@ const switchCellsColor = (adjacentCells) => {
    }
 };
 
+// Find all adjacent cells for current cell
 const findAdjacentCells = (cell) => {
    const cellIndex = +cell.dataset.index;
    const numOfRows = +Math.sqrt(fieldSize);
@@ -141,6 +160,7 @@ const findAdjacentCells = (cell) => {
    return adjacentCells;
 };
 
+// Random changing state of the cell and adjacent to it cells
 const shuffleFieldCells = () => {
    let randomCellsIndex = [];
    while (randomCellsIndex.length != fieldSize * fieldSize) {
@@ -159,7 +179,7 @@ const shuffleFieldCells = () => {
 };
 
 
-// Initialize your previous best result
+// Show your record on game start modal
 const showRecords = () => {
    for (let record of recordModal) {
       const rows = record.dataset.rows;
@@ -173,18 +193,12 @@ const showRecords = () => {
    gameWinRecordNumber.innerHTML = recordNumber;
 };
 
-const openWinModal = () => {
+
+// Open win modal
+const openWinModal = (recordNumber, newRecordNumberFlag) => {
    gameWinModal.classList.remove('visually-hidden');
-};
 
-const closeWinModal = () => {
-   gameWinModal.classList.add('visually-hidden');
-};
-
-const showWinModal = (recordNumber, newRecordNumberFlag) => {
-   closeGame();
-   openWinModal();
-
+   // If your beat a new record show it on screen else hide
    if (newRecordNumberFlag) {
       gameWinRecordNumber.innerHTML = recordNumber;
       gameWinRecord.classList.remove('visually-hidden');
@@ -193,29 +207,43 @@ const showWinModal = (recordNumber, newRecordNumberFlag) => {
       gameWinRecord.classList.add('visually-hidden');
 };
 
+// Close win modal
+const closeWinModal = () => {
+   gameWinModal.classList.add('visually-hidden');
+};
+
+
+// remember the game record
 const storeRecordNumber = (recordNumber) => {
    const fieldRows = Math.sqrt(fieldSize);
    localStorage.setItem(`FieldRecordNumber${fieldRows}`, recordNumber);
 };
 
+// check if the game is over
 const checkGameWin = () => {
    const fieldCells = document.querySelectorAll('.game-cell.selected');
+   // check if all field cells are in winning state
    if (fieldCells.length === 0) {
-      // check new record number if it's true change newRecordNumberFlag
+      // checking for a new game record and rewrite it
       let newRecordNumberFlag = false;
       if (movesNumber < recordNumber) {
          recordNumber = movesNumber;
          newRecordNumberFlag = true;
       }
 
-      showWinModal(recordNumber, newRecordNumberFlag);
+      // close game and open win modal
+      closeGame();
+      openWinModal(recordNumber, newRecordNumberFlag);
       
+      // remember my new record and show it on start modal
       storeRecordNumber(recordNumber);
       showRecords();
 
+      // remove all previous game moves and records
       cleanMovesNumber();
       rewriteRecordNumber();
 
+      // random shuffle field cells 
       shuffleFieldCells();
    }
 };
@@ -230,19 +258,21 @@ for (let fieldSizeItem of fieldSizeItems) {
    fieldSizeItem.addEventListener('click', function() {
       getFieldSize(this);
 
-      closeModal();
+      closeStartModal();
       openGame();
 
       shuffleFieldCells();
    });
 }
 
+// Restart game
 gameButtonRestart.addEventListener('click', () => {
    shuffleFieldCells();
 
    cleanMovesNumber();
 });
 
+// Exit from current game
 gameButtonExit.addEventListener('click', () => {
    cleanMovesNumber();
 
@@ -261,7 +291,13 @@ gameField.addEventListener('click', (event) => {
    }
 });
 
+// Closing win modal
 gameWinModalCap.addEventListener('click', () => {
+   closeWinModal();
+   openStartModal();
+});
+
+gameWinModalCloseButton.addEventListener('click', () => {
    closeWinModal();
    openStartModal();
 });
