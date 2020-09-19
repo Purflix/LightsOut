@@ -30,20 +30,20 @@ let movesNumber = 0, recordNumber = Infinity;
 
 // Functions
 
-// set field size
+// Set field size
 const setFieldSize = (fieldSize) => {
    gameField.style.gridTemplateRows = `repeat(${Math.sqrt(fieldSize)}, 1fr)`;
    gameField.style.gridTemplateColumns = `repeat(${Math.sqrt(fieldSize)}, 1fr)`;
 };
 
-// remove all previous field cells
+// Remove all previous field cells
 const removeFieldCells = () => {
    if (gameField.hasChildNodes()) {
       gameField.innerHTML = '';
    }
 };
 
-// create field cells
+// Create field cells
 const createFieldCells = (fieldSize) => {
    // while need to create a field cell do this
    for (let counter = 0; counter < fieldSize; ++counter) {
@@ -56,6 +56,7 @@ const createFieldCells = (fieldSize) => {
    }
 };
 
+// Get field size + init game field
 const getFieldSize = (event) => {
    fieldSize = event.dataset.size;
 
@@ -213,13 +214,13 @@ const closeWinModal = () => {
 };
 
 
-// remember the game record
+// Remember the game record
 const storeRecordNumber = (recordNumber) => {
    const fieldRows = Math.sqrt(fieldSize);
    localStorage.setItem(`FieldRecordNumber${fieldRows}`, recordNumber);
 };
 
-// check if the game is over
+// Check if the game is over
 const checkGameWin = () => {
    const fieldCells = document.querySelectorAll('.game-cell.selected');
    // check if all field cells are in winning state
@@ -280,24 +281,28 @@ gameButtonExit.addEventListener('click', () => {
    openStartModal();
 });
 
+// Click on field cell event
 gameField.addEventListener('click', (event) => {
    const cell = event.target;
    if (cell.classList.contains('game-cell')) {
       const adjacentCells = findAdjacentCells(cell);
 
+      // increase moves number
       rewriteMovesNumber();
+      // switching cell state and adjacent to it cells
       switchCellsColor(adjacentCells);
+      // check if the game is over
       checkGameWin();
    }
 });
 
-// Closing win modal
+// Close win modal event
 gameWinModalCap.addEventListener('click', () => {
    closeWinModal();
-   openStartModal();
+   openGame();
 });
-
+// Close win modal event
 gameWinModalCloseButton.addEventListener('click', () => {
    closeWinModal();
-   openStartModal();
+   openGame();
 });
