@@ -1,0 +1,181 @@
+@import "variables";
+@import "reset";
+@import "global";
+
+.field-size-modal-wrapper {
+   width: 280px;
+   text-align: center;
+   border: 4px solid var(--border-color);
+   background-color: var(--color-white);
+   border-radius: 20px 20px 0 0;
+}
+
+.field-size-title {
+   position: relative;
+   font-size: 30px;
+   padding: 20px 10px;
+   border-bottom: 2px dashed var(--border-color);
+   &:before {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      bottom: 0;
+      left: 50%;
+      width: 17px;
+      height: 17px;
+      border-bottom: 2px solid var(--color-white);
+      border-bottom: 2px dashed var(--border-color);
+      border-left: 2px solid var(--color-white);
+      border-left: 2px dashed var(--border-color);
+      transform: translate(-50%, calc(50% + 2px)) rotate(-45deg);
+      background-color: var(--color-white);
+   }
+}
+
+.field-size-list {
+   display: flex;
+   flex: 0 1 100%;
+   flex-direction: column;
+}
+
+.field-size-item {
+   cursor: pointer;
+   position: relative;
+   flex: 0 1 100%;
+   font-size: 24px;
+   font-weight: bold;
+   color: var(--color-black);
+   padding: 16px 24px;
+   transition: background-color 0.2s;
+   &:not(:last-child) {
+      // margin-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+      &:before {
+         content: "";
+         position: absolute;
+         z-index: 3;
+         bottom: 0;
+         left: 50%;
+         width: 17px;
+         height: 17px;
+         border-bottom: 2px solid var(--color-white);
+         border-bottom: 2px dashed var(--border-color);
+         border-left: 2px solid var(--color-white);
+         border-left: 2px dashed var(--border-color);
+         transition: background-color 0.2s;
+         transform: translate(-50%, calc(50% + 1px)) rotate(-45deg);
+         background-color: var(--color-white);
+      }
+   }
+   &:hover {
+      background: var(--color-gray);
+      &:before {
+         background: var(--color-gray);
+      }
+   }
+}
+
+.record {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   font-size: 12px;
+   padding: 5px;
+   border-top: 2px solid var(--border-color);
+   border-left: 2px solid var(--border-color);
+}
+
+.game-wrapper {
+   max-width: 280px;
+}
+
+.game-navigation {
+   display: flex;
+   justify-content: center;
+   margin: 36px 0;
+   &-button {
+      min-width: 130px;
+      color: var(--color-black);
+      text-transform: uppercase;
+      padding: 5px;
+      border: 2px dashed var(--border-color);
+      transition: background-color 0.2s;
+      &:first-child {
+         border-radius: 30px 0 0 30px;
+         transform: rotate(-10deg) skew(-10deg) translateX(2px);
+         background-color: var(--color-green);
+      }
+      &:last-child {
+         border-radius: 0 30px 30px 0;
+         transform: rotate(10deg) skew(10deg) translateX(-2px);
+         background-color: var(--color-red);
+      }
+   }
+}
+
+.game-title {
+   text-align: center;
+   margin-bottom: 48px;
+}
+
+.game-info {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+}
+
+.game-info {
+   margin: -10px;
+}
+
+.game-moves, .game-record {
+   padding: 10px;
+}
+
+.game-moves-number, .game-record-number {
+   font-weight: 700;
+}
+
+.game-field {
+   display: grid;
+   width: 280px;
+   height: 280px;
+   margin-bottom: 48px;
+   grid-template-rows: repeat(3, 1fr);
+   grid-template-columns: repeat(3, 1fr);
+   border-collapse: collapse;
+}
+
+.game-cell {
+   cursor: pointer;
+   border: 2px solid var(--border-color);
+   background-color: var(--color-white);
+   transition: background-color 0.2s var(--animation-function);
+}
+
+.game-cell.selected {
+   background-color: var(--color-gray);
+}
+
+.game-win-modal-cap {
+   cursor: pointer;
+   position: absolute;
+   z-index: 2;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+
+.game-win-modal-wrapper {
+   position: relative;
+   z-index: 3;
+   text-align: center;
+   padding: 48px;
+   background: var(--color-white);
+   border-radius: 48px 48px 0 0;
+}
+
+.game-win-record {
+   margin-top: 24px;
+}

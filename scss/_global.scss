@@ -1,0 +1,32 @@
+.visually-hidden {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+body {
+   font-family: 'Architects Daughter', cursive;
+   font-weight: 400;
+   color: var(--color-primary);
+   font-size: 20px;
+   line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Dancing Script', cursive;
+   font-weight: 700;
+   font-size: 40px;
+}
+
+.centered {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+}

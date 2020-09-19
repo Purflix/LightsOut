@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Lights Out</title>
+   <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+   <div id="field-size-modal" class="field-size-modal centered">
+      <div class="field-size-modal-wrapper">
+         <h2 class="field-size-title">Select the field size</h2>
+         <ul class="field-size-list">
+            <li class="field-size-item" data-size="9">
+               3 &times; 3
+               <small class="record visually-hidden" data-rows="3">Record: <span class="record-number"></span></small>
+            </li>
+            <li class="field-size-item" data-size="16">
+               4 &times; 4
+               <small class="record visually-hidden" data-rows="4">Record: <span class="record-number"></span></small>
+            </li>
+            <li class="field-size-item" data-size="25">
+               5 &times; 5
+               <small class="record visually-hidden" data-rows="5">Record: <span class="record-number"></span></small>
+            </li>
+         </ul>
+      </div>
+   </div>
+
+   <div id="game-win-modal" class="game-win-modal centered visually-hidden">
+      <div class="game-win-modal-wrapper">
+         <h3 class="game-win-title">Congratulation</h3>
+         <p id="game-win-record" class="game-win-record visually-hidden">Your New Record: <span id="game-win-record-number">-</span></p>
+      </div>
+      <div class="game-win-modal-cap"></div>
+   </div>
+
+   <div id="game" class="game centered visually-hidden">
+      <div class="game-wrapper">
+         <div class="game-navigation">
+            <button id="game-button-restart" class="game-navigation-button">Restart</button>
+            <button id="game-button-exit" class="game-navigation-button">Exit</button>
+         </div>
+         <h1 class="game-title">Lights Out Game</h1>
+         <div id="game-field" class="game-field">
+         </div>
+         <div class="game-info">
+            <div class="game-moves">
+               Moves: <span id="game-moves-number" class="game-moves-number">-</span>
+            </div>
+            <div class="game-record">
+               Record: <span id="game-record-number" class="game-record-number">-</span>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <script src="js/script.js" defer></script>
+</body>
+</html>
