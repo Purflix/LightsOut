@@ -82,7 +82,7 @@ const cleanMovesNumber = () => {
 };
 
 
-const openModal = () => {
+const openStartModal = () => {
    fieldSizeModal.classList.remove('visually-hidden');
 };
 
@@ -237,7 +237,6 @@ for (let fieldSizeItem of fieldSizeItems) {
    });
 }
 
-
 gameButtonRestart.addEventListener('click', () => {
    shuffleFieldCells();
 
@@ -248,7 +247,7 @@ gameButtonExit.addEventListener('click', () => {
    cleanMovesNumber();
 
    closeGame();
-   openModal();
+   openStartModal();
 });
 
 gameField.addEventListener('click', (event) => {
@@ -262,8 +261,7 @@ gameField.addEventListener('click', (event) => {
    }
 });
 
-
 gameWinModalCap.addEventListener('click', () => {
    closeWinModal();
-   openModal();
+   openStartModal();
 });
