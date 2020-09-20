@@ -9,7 +9,23 @@
    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-   <div id="field-size-modal" class="field-size-modal centered">
+   <div id="rules-modal" class="rules-modal centered">
+      <div class="rules-modal-wrapper">
+         <h3 class="rules-modal-title">Game rules</h3>
+         <p class="rules-modal-description">When the game starts, a random number or a stored pattern of these lights is switched on. Pressing any of the lights
+         will toggle it and the four adjacent lights. The goal of the puzzle is to switch all the lights off, preferably in as
+         few button presses as possible.</p>
+         <a href="https://en.wikipedia.org/wiki/Lights_Out_(game)" class="rules-modal-more" target="_blank">
+            Read more on <span>Wikipedia</span>
+         </a>
+         <button id="rules-modal-close-button" class="rules-modal-close">
+            Close <img src="img/close.svg" alt="">
+         </button>
+      </div>
+      <div class="rules-modal-cap"></div>
+   </div>
+
+   <div id="field-size-modal" class="field-size-modal centered visually-hidden">
       <div class="field-size-modal-wrapper">
          <h2 class="field-size-title">Select the field size</h2>
          <ul class="field-size-list">

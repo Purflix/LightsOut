@@ -23,6 +23,10 @@ const gameWinModal = document.getElementById('game-win-modal'),
    gameWinModalCap = document.querySelector('.game-win-modal-cap'),
    gameWinModalCloseButton = document.getElementById('game-win-modal-close-button');
 
+const rulesModal = document.getElementById('rules-modal'),
+   rulesModalCloseButton = document.getElementById('rules-modal-close-button'),
+   rulesModalCap = document.querySelector('.rules-modal-cap');
+
 let fieldSize = 9;
 let movesNumber = 0, recordNumber = Infinity;
 
@@ -213,6 +217,16 @@ const closeWinModal = () => {
    gameWinModal.classList.add('visually-hidden');
 };
 
+// Open rules modal
+const openRulesModal = () => {
+   rulesModal.classList.remove('visually-hidden');
+};
+
+// Close rules modal
+const closeRulesModal = () => {
+   rulesModal.classList.add('visually-hidden');
+};
+
 
 // Remember the game record
 const storeRecordNumber = (recordNumber) => {
@@ -305,4 +319,15 @@ gameWinModalCap.addEventListener('click', () => {
 gameWinModalCloseButton.addEventListener('click', () => {
    closeWinModal();
    openGame();
+});
+
+// Close win modal event
+rulesModalCap.addEventListener('click', () => {
+   closeRulesModal();
+   openStartModal();
+});
+// Close win modal event
+rulesModalCloseButton.addEventListener('click', () => {
+   closeRulesModal();
+   openStartModal();
 });
