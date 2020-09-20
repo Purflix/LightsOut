@@ -25,7 +25,8 @@ const gameWinModal = document.getElementById('game-win-modal'),
 
 const rulesModal = document.getElementById('rules-modal'),
    rulesModalCloseButton = document.getElementById('rules-modal-close-button'),
-   rulesModalCap = document.querySelector('.rules-modal-cap');
+   rulesModalCap = document.querySelector('.rules-modal-cap'),
+   openRulesButton = document.querySelector('.open-rules');
 
 let fieldSize = 9;
 let movesNumber = 0, recordNumber = Infinity;
@@ -321,13 +322,18 @@ gameWinModalCloseButton.addEventListener('click', () => {
    openGame();
 });
 
-// Close win modal event
+// Close rules modal event
 rulesModalCap.addEventListener('click', () => {
    closeRulesModal();
    openStartModal();
 });
-// Close win modal event
+// Close rules modal event
 rulesModalCloseButton.addEventListener('click', () => {
    closeRulesModal();
    openStartModal();
+});
+// Open rules modal event
+openRulesButton.addEventListener('click', () => {
+   closeStartModal();
+   openRulesModal();
 });
